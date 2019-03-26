@@ -1,3 +1,9 @@
 require_relative '../config/environment'
 
-puts "hello world"
+
+greet
+user_name
+who_are_you
+search_question
+find_a_myth
+select_a_search
