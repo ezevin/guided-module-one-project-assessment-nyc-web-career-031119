@@ -18,11 +18,18 @@ class CLI
 
   def who_are_you
     puts "Wait you're not Newt Scamander. Who are you?"
-    name = gets.chomp
+    name = gets.chomp.capitalize
     @user = User.find_or_create_by(name: "#{name}")
+    # binding.pry
+    if find_a_user.include?(@user.id)
+      puts "\n \n"
+      puts "Oh! Sorry #{@user.name.capitalize} I didn't recognize you! Welcome Back."
+      view_book
+    else
     puts "\n \n"
     puts "Welcome #{@user.name.capitalize}! Ready to start creating your own book of fantastic beasts? (Y/N)"
     yes_or_no
+  end
   end
 
   def yes_or_no
@@ -36,9 +43,6 @@ class CLI
     end
   end
 
-  # def search_question
-  #   puts "Where would you like to begin your search?"
-  # end
 
   def find_a_myth
     puts "Where would you like to begin your search? You can search by:"
@@ -181,11 +185,11 @@ class CLI
       puts "Do you know any fun facts about this creature?"
       facts = gets.chomp.capitalize
       puts "Does it have a tail? (true or false?)"
-      tail = gets.chomp
-      tail_to_bool = tail == "true" ? true : false
+      tail = gets.chomp.downcase
+      tail_to_bool = tail == "true" || wing == "yes" || wing == "y" || wing == "t" || wing == "sure" || wing == "yeah" ? true : false
       puts "Does it have wings? (true or false?)"
-      wing = gets.chomp
-      wing_to_bool = wing == "true" ? true : false
+      wing = gets.chomp.downcase
+      wing_to_bool = wing == "true" || wing == "yes" || wing == "y" || wing == "t" || wing == "sure" || wing == "yeah" ? true : false
       @myth = Myth.find_or_create_by(name: "#{name}", location: "#{location}", origin_country: "#{origin}", facts: "#{facts}", has_tail: tail_to_bool, has_wings: wing_to_bool)
       puts "You just discovered a previously unknown creature."
       save_to_book
@@ -240,7 +244,10 @@ class CLI
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
       puts "\n \n"
       puts "Awesome!"
-      species = UserMyth.find_or_create_by(user_id: @user.id, myth_id: @myth.id)
+      puts "Where should it go in your book? On a scale of 1-10, 1 being the beginning, 10 is the end."
+      rating = gets.chomp.to_f
+      UserMyth.find_or_create_by(user_id: @user.id, myth_id: @myth.id, rating: rating)
+      refetch_user
       view_book
     else
       puts "\n \n \n"
@@ -256,14 +263,25 @@ class CLI
     puts "\n"
     answer = gets.chomp.downcase
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
-       @user.myths.each do |myth|
+      #take the array and sort it
+      # then iterate and show info
+
+      # if there is only one instance, return it
+      # otherwise sort it.
+
+        sorted =  @user.user_myths.sort do |a,b|
+          a.rating <=> b.rating
+        end
+# binding.pry
+       sorted.each do |usermyth|
+         # binding.pry
          puts "\n \n \n"
          puts "~*~*~*~*~*~*~*~*~*~*~*~*"
-         # puts "Page #{@user.myths.length}"
-         puts myth.name.capitalize
-         puts myth.location.capitalize
-         puts myth.origin_country.capitalize
-         puts myth.facts.capitalize
+         # puts "Page #{usermyth.myths.count}"
+         puts usermyth.myth.name.capitalize
+         puts usermyth.myth.location.capitalize
+         puts usermyth.myth.origin_country.capitalize
+         puts usermyth.myth.facts.capitalize
          puts "~*~*~*~*~*~*~*~*~*~*~*~*"
       end
       puts "\n \n \n"
@@ -286,6 +304,16 @@ def keep_searching
     puts "\n \n"
     exit
   end
+end
+
+def find_a_user
+  User.all.map do |names|
+    names.id
+  end
+end
+
+def refetch_user
+  @user = User.find(@user.id)
 end
 
 end
