@@ -1,7 +1,6 @@
 class CLI
 
   attr_accessor :user, :myth
-  @@book = []
 
   def initialize
     @user = nil
@@ -153,31 +152,48 @@ class CLI
           puts "~*~*~*~*~*~*~*~*~*~*~*~*"
       else
         puts "I'm sorry that's not a known creature. Did you discover something new? (y/n)"
+        puts "~*~*~*~*~*~*~*~*~*~*~*~*"
+        puts "\n \n"
         answer = gets.chomp.downcase
         if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
+          puts "\n \n"
           puts "Would you like to create a new entry? (y/n)?"
-          response = gets.chomp.downcase
-          if response == "y" || response == "yes" || response == "ok" || response == "sure" || response == "yeah"
-            puts "Where is does it live? (Sky, Sea, Land)"
-            location = gets.chomp.capitalize
-            puts "What country did it originate from?"
-            origin = gets.chomp.capitalize
-            puts "Do you know any fun facts about this creature?"
-            facts = gets.chomp.capitalize
-            puts "Does it have a tail? (true or false?)"
-            tail = gets.chomp
-            tail_to_bool = wing == "true" ? true : false
-            puts "Does it have wings? (true or false?)"
-            wing = gets.chomp
-            wing_to_bool = wing == "true" ? true : false
-            @myth = Myth.find_or_create_by(name: "#{species.capitalize}", location: "#{location}", origin_country: "#{origin}", facts: "#{facts}", has_tail: tail_to_bool, has_wings: wing_to_bool)
-            puts "You're all set, would you like to view your book? (y/n)"
-          end
+          puts "~*~*~*~*~*~*~*~*~*~*~*~*"
+          puts "\n \n"
+          create_a_new_entry
         else
+          puts "\n \n \n"
           puts "Oh, ok then. Would you like to search again? (y/n)"
           keep_searching
         end
       end
+  end
+
+  def create_a_new_entry
+    response = gets.chomp.downcase
+    if response == "y" || response == "yes" || response == "ok" || response == "sure" || response == "yeah"
+      puts "What did you call it again?"
+      name = gets.chomp.capitalize
+      puts "Where is does it live? (Sky, Sea, Land)"
+      location = gets.chomp.capitalize
+      puts "What country did it originate from?"
+      origin = gets.chomp.capitalize
+      puts "Do you know any fun facts about this creature?"
+      facts = gets.chomp.capitalize
+      puts "Does it have a tail? (true or false?)"
+      tail = gets.chomp
+      tail_to_bool = tail == "true" ? true : false
+      puts "Does it have wings? (true or false?)"
+      wing = gets.chomp
+      wing_to_bool = wing == "true" ? true : false
+      @myth = Myth.find_or_create_by(name: "#{name}", location: "#{location}", origin_country: "#{origin}", facts: "#{facts}", has_tail: tail_to_bool, has_wings: wing_to_bool)
+      puts "You just discovered a previously unknown creature."
+      save_to_book
+    else
+      puts "\n \n \n"
+      puts "Don't want to share your discovery? That's ok, maybe next time. Would you like to look for a new creature? (y/n)"
+      keep_searching
+    end
   end
 
   def location_info
@@ -217,10 +233,6 @@ class CLI
     end
   end
 
-  # def learn_more
-  # puts "Pick one to learn more."
-  # end
-
   def save_to_book
     puts "Wow, that seems really neat. Would you like to add this creature to your book? (y/n)"
     puts "\n"
@@ -228,7 +240,6 @@ class CLI
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
       puts "\n \n"
       puts "Awesome!"
-      @@book << @myth
       species = UserMyth.find_or_create_by(user_id: @user.id, myth_id: @myth.id)
       view_book
     else
@@ -272,6 +283,8 @@ def keep_searching
     select_a_search
   else
     puts "Have a nice day!"
+    puts "\n \n"
+    exit
   end
 end
 
