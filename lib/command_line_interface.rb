@@ -19,13 +19,14 @@ class CLI
   def who_are_you
     puts "Wait you're not Newt Scamander. Who are you?"
     name = gets.chomp.capitalize
-    @user = User.find_or_create_by(name: "#{name}")
+    @user = User.find_by(name: "#{name}")
     # binding.pry
-    if find_a_user.include?(@user.id)
+    if @user != nil
       puts "\n \n"
-      puts "Oh! Sorry #{@user.name.capitalize} I didn't recognize you! Welcome Back."
+      puts "Oh! Sorry #{@user.name.capitalize}! I didn't recognize you! Welcome Back."
       view_book
     else
+      @user = User.create(name: "#{name}")
     puts "\n \n"
     puts "Welcome #{@user.name.capitalize}! Ready to start creating your own book of fantastic beasts? (Y/N)"
     yes_or_no
@@ -38,6 +39,7 @@ class CLI
       puts "\n \n"
       puts "Great! Let's Go!"
     else
+      puts "\n \n"
       puts "Alright, maybe next time."
       exit
     end
@@ -243,12 +245,19 @@ class CLI
     answer = gets.chomp.downcase
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
       puts "\n \n"
+      if @myth.id != UserMyth.find_by(id: @myth.id)
+        puts "I'm sorry it seems like you already have that creature in your book...but "
+        view_book
+      else
       puts "Awesome!"
+      puts "\n"
       puts "Where should it go in your book? On a scale of 1-10, 1 being the beginning, 10 is the end."
+      puts "\n"
       rating = gets.chomp.to_f
-      UserMyth.find_or_create_by(user_id: @user.id, myth_id: @myth.id, rating: rating)
+      UserMyth.create(user_id: @user.id, myth_id: @myth.id, rating: rating)
       refetch_user
       view_book
+      end
     else
       puts "\n \n \n"
       puts "Ok. Shall we look for something else? (y/n)"
@@ -263,30 +272,28 @@ class CLI
     puts "\n"
     answer = gets.chomp.downcase
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
-      #take the array and sort it
-      # then iterate and show info
-
-      # if there is only one instance, return it
-      # otherwise sort it.
-
-        sorted =  @user.user_myths.sort do |a,b|
-          a.rating <=> b.rating
+      if !@user.user_myths.empty?
+          sorted =  @user.user_myths.sort do |a,b|
+            a.rating <=> b.rating
+          end
+         sorted.each_with_index do |usermyth, index|
+           puts "\n \n \n"
+           puts "~*~*~*~*~*~*~*~*~*~*~*~*"
+           puts "Page #{index + 1}"
+           puts usermyth.myth.name.capitalize
+           puts usermyth.myth.location.capitalize
+           puts usermyth.myth.origin_country.capitalize
+           puts usermyth.myth.facts.capitalize
+           puts "~*~*~*~*~*~*~*~*~*~*~*~*"
         end
-# binding.pry
-       sorted.each do |usermyth|
-         # binding.pry
-         puts "\n \n \n"
-         puts "~*~*~*~*~*~*~*~*~*~*~*~*"
-         # puts "Page #{usermyth.myths.count}"
-         puts usermyth.myth.name.capitalize
-         puts usermyth.myth.location.capitalize
-         puts usermyth.myth.origin_country.capitalize
-         puts usermyth.myth.facts.capitalize
-         puts "~*~*~*~*~*~*~*~*~*~*~*~*"
+        puts "\n \n \n"
+        puts "Looks great! Would you like to keep searching? (y/n)"
+        keep_searching
+      else
+        puts "\n \n \n"
+        puts "I'm sorry, it looks like you haven't entered any creatures into your book yet. Would you like to find some? (y/n)"
+        keep_searching
       end
-      puts "\n \n \n"
-      puts "Looks great! Would you like to keep searching? (y/n)"
-      keep_searching
     else
       puts "Sounds good. Would you like to keep searching for creatures? (y/n)"
   end
@@ -303,12 +310,6 @@ def keep_searching
     puts "Have a nice day!"
     puts "\n \n"
     exit
-  end
-end
-
-def find_a_user
-  User.all.map do |names|
-    names.id
   end
 end
 
