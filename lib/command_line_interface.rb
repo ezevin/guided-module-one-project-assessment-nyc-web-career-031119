@@ -9,6 +9,15 @@ class CLI
 
   def greet
     puts 'Welcome back Mr. Scamander.'
+    # puts '(\ '
+    # puts '\'\ '
+    # puts  '\'\    __________ '
+    # puts ' / '|   ()'_________') ''
+    # puts ' \ '/    \ ~~~~~~~~ \ ' '
+    # puts '   \       \ ~~~~~~   \  '
+    # puts '  ==).      \__________\ '
+    # puts  '(__)       ()__________)'
+
   end
 
   def hit_space
@@ -103,10 +112,10 @@ class CLI
   end
 
   def search_by_species
-   species = Myth.pluck(:name)
-   puts species.uniq.compact
-   puts "~*~*~*~*~*~*~*~*~*~*~*~*"
-   puts "\n \n \n"
+     species = Myth.pluck(:name)
+     puts species.uniq.compact
+     puts "~*~*~*~*~*~*~*~*~*~*~*~*"
+     puts "\n \n \n"
   end
 
   def search_by_location
@@ -149,30 +158,30 @@ class CLI
     species = gets.chomp.capitalize
     puts "\n \n \n"
     puts "~*~*~*~*~*~*~*~*~*~*~*~*"
-    @myth = Myth.all.find_by(name: "#{species}")
-      if @myth
-          puts @myth.name.capitalize
-          puts @myth.location.capitalize
-          puts @myth.origin_country.capitalize
-          puts @myth.facts.capitalize
-          puts "~*~*~*~*~*~*~*~*~*~*~*~*"
-      else
-        puts "I'm sorry that's not a known creature. Did you discover something new? (y/n)"
-        puts "~*~*~*~*~*~*~*~*~*~*~*~*"
-        puts "\n \n"
-        answer = gets.chomp.downcase
-        if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
-          puts "\n \n"
-          puts "Would you like to create a new entry? (y/n)?"
-          puts "~*~*~*~*~*~*~*~*~*~*~*~*"
-          puts "\n \n"
-          create_a_new_entry
+      @myth = Myth.all.find_by(name: "#{species}")
+        if @myth
+            puts @myth.name.capitalize
+            puts @myth.location.capitalize
+            puts @myth.origin_country.capitalize
+            puts @myth.facts.capitalize
+            puts "~*~*~*~*~*~*~*~*~*~*~*~*"
         else
-          puts "\n \n \n"
-          puts "Oh, ok then. Would you like to search again? (y/n)"
-          keep_searching
+          puts "I'm sorry that's not a known creature. Did you discover something new? (y/n)"
+          puts "~*~*~*~*~*~*~*~*~*~*~*~*"
+          puts "\n \n"
+          answer = gets.chomp.downcase
+          if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
+            puts "\n \n"
+            puts "Would you like to create a new entry? (y/n)?"
+            puts "~*~*~*~*~*~*~*~*~*~*~*~*"
+            puts "\n \n"
+            create_a_new_entry
+          else
+            puts "\n \n \n"
+            puts "Oh, ok then. Would you like to search again? (y/n)"
+            keep_searching
+          end
         end
-      end
   end
 
   def create_a_new_entry
@@ -245,7 +254,7 @@ class CLI
     answer = gets.chomp.downcase
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
       puts "\n \n"
-      if @myth.id != UserMyth.find_by(id: @myth.id)
+      if @myth.id == UserMyth.find_by(id: @myth.id)
         puts "I'm sorry it seems like you already have that creature in your book...but "
         view_book
       else
@@ -295,6 +304,7 @@ class CLI
         keep_searching
       end
     else
+      puts "\n \n"
       puts "Sounds good. Would you like to keep searching for creatures? (y/n)"
   end
 end
@@ -307,7 +317,7 @@ def keep_searching
     find_a_myth
     select_a_search
   else
-    puts "Have a nice day!"
+    puts "Alright until next time!"
     puts "\n \n"
     exit
   end
