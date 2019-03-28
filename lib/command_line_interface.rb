@@ -1,46 +1,48 @@
 class CLI
 
-  attr_accessor :user, :myth
+  attr_accessor :user, :myth, :player
 
   def initialize
     @user = nil
     @myth = nil
+    @player = player
   end
 
   def greet
-    puts 'Welcome back Mr. Scamander.'.colorize(:green)
-    puts "____________________________________________________"
-    puts"|____________________________________________________|"
-    puts"| __     __   ____   ___ ||  ____    ____     _  __  |"
-    puts"||  |__ |--|_| || |_|   |||_|**|*|__|+|+||___| ||  | |"
-    puts"||==|^^||--| |=||=| |=*=||| |~~|~|  |=|=|| | |~||==| |"
-  puts  "||  |##||  | | || | |H P|||-|  | |==|+|+||-|-|~||__| |"
-  puts  "||__|__||__|_|_||_|_|___|||_|__|_|__|_|_||_|_|_||__|_|"
-  puts  "||_______________________||__________________________|"
-  puts  "| _____________________  ||      __   __  _  __    _ |"
-  puts  "||=|=|=|=|=|=|=|=|=|=|=| __..\ / |  |_|  ||#||==|  / /|"
-  puts  "|| | | | | | | | | | | |/ \  \   \ \|++|=|  || ||==| / / |"
-  puts  "||_|_|_|_|_|_|_|_|_|_|_/_/ \_.___ \__|_|__||_||__|/_/__|"
-  puts  "|____________________ / \~()/()~// \ __________________|"
-  puts  "| __   __    _  _     \ _  (_ .  _/ _    ___     _____|"
-  puts  "||~~|_|..|__| || |_ _    \ // \ \ /  |=|__|~|~|___| | | |"
-  puts  "||--|+|^^|==|1||2| | |__/ \ __ / \__| |==|x|x|+|+|=|=|=|"
-  puts  "||__|_|__|__|_||_|_| /   \  \  / /   \_|__|_|_|_|_|_|_|_|"
-  puts  "|_________________ _/     \ /\ /\ /    \_ _______________|"
-  puts  "| _____   _   __  |/       \../      \ |  __   __   ___|"
-  puts  "||_____|_| |_|##|_||   |   \ / __|   ||_|==|_|++|_|-|||"
-  puts  "||______||=|#|--| | \    \   o    /   /| |  |~|  | | |||"
-  puts  "||______||_|_|__|_|_ \    \  o   /   /_|_|__|_|__|_|_|||"
-  puts  "|_________ __________ \___ \____/___/___________ ______|"
-  puts  "|__    _  /    ________     ______           /| _ _ _|"
-  puts  "| \  \  |=|/   //    /| //   /  /  / |        / ||%|%|%|"
-  puts  "|  \ /\ |*/  .//____//.//   /__/__/ (_)      /  ||=|=|=|"
- puts "|  \ /\ |/   /(____|/ //                    /  /||~|~|~|"
-  puts  "|___\ _/   /________//   ________         /  / ||_|_|_|"
-  puts  "|___ /   (|________/   | \_______ \       /  /| |______|"
-  puts    "    /                  \ |________)     /  / | |"
+    puts 'Welcome back Mr. Scamander.'.colorize(:green).bold
+  end
 
-
+  def hello
+    puts "____________________________________________________".colorize(:yellow).bold
+    puts"|____________________________________________________|".colorize(:yellow).bold
+    puts"| __     __   ____   ___ ||  ____    ____     _  __  |".colorize(:yellow).bold
+    puts"||  |__ |--|_| || |_|   |||_|**|*|__|+|+||___| ||  | |".colorize(:yellow).bold
+    puts"||==|^^||--| |=||=| |=*=||| |~~|~|  |=|=|| | |~||==| |".colorize(:yellow).bold
+  puts  "||  |##||  | | || | |H P|||-|  | |==|+|+||-|-|~||__| |".colorize(:yellow).bold
+  puts  "||__|__||__|_|_||_|_|___|||_|__|_|__|_|_||_|_|_||__|_|".colorize(:yellow).bold
+  puts  "||_______________________||__________________________|".colorize(:yellow).bold
+  puts  "| _____________________  ||      __   __  _  __    _ |".colorize(:yellow).bold
+  puts  "||=|=|=|=|=|=|=|=|=|=|=| __..\ / |  |_|  ||#||==|  / /|".colorize(:yellow).bold
+  puts  "|| | | | | | | | | | | |/ \  \   \ \|++|=|  || ||==| / / |".colorize(:yellow).bold
+  puts  "||_|_|_|_|_|_|_|_|_|_|_/_/ \_.___ \__|_|__||_||__|/_/__|".colorize(:yellow).bold
+  puts  "|____________________ / \~()/()~// \ __________________|".colorize(:yellow).bold
+  puts  "| __   __    _  _     \ _  (_ .  _/ _    ___     _____|".colorize(:yellow).bold
+  puts  "||~~|_|..|__| || |_ _    \ // \ \ /  |=|__|~|~|___| | | |".colorize(:yellow).bold
+  puts  "||--|+|^^|==|1||2| | |__/ \ __ / \__| |==|x|x|+|+|=|=|=|".colorize(:yellow).bold
+  puts  "||__|_|__|__|_||_|_| /   \  \  / /   \_|__|_|_|_|_|_|_|_|".colorize(:yellow).bold
+  puts  "|_________________ _/     \ /\ /\ /    \_ _______________|".colorize(:yellow).bold
+  puts  "| _____   _   __  |/       \../      \ |  __   __   ___|".colorize(:yellow).bold
+  puts  "||_____|_| |_|##|_||   |   \ / __|   ||_|==|_|++|_|-|||".colorize(:yellow).bold
+  puts  "||______||=|#|--| | \    \   o    /   /| |  |~|  | | |||".colorize(:yellow).bold
+  puts  "||______||_|_|__|_|_ \    \  o   /   /_|_|__|_|__|_|_|||".colorize(:yellow).bold
+  puts  "|_________ __________ \___ \____/___/___________ ______|".colorize(:yellow).bold
+  puts  "|__    _  /    ________     ______           /| _ _ _|".colorize(:yellow).bold
+  puts  "| \  \  |=|/   //    /| //   /  /  / |        / ||%|%|%|".colorize(:yellow).bold
+  puts  "|  \ /\ |*/  .//____//.//   /__/__/ (_)      /  ||=|=|=|".colorize(:yellow).bold
+ puts "|  \ /\ |/   /(____|/ //                    /  /||~|~|~|".colorize(:yellow).bold
+  puts  "|___\ _/   /________//   ________         /  / ||_|_|_|".colorize(:yellow).bold
+  puts  "|___ /   (|________/   | \_______ \       /  /| |______|".colorize(:yellow).bold
+  puts    "    /                  \ |________)     /  / | |".colorize(:yellow).bold
   end
 
   def hit_space
@@ -82,7 +84,7 @@ class CLI
     puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
     puts "\s1. Species \n 2. Location \n 3. Country of Origin \n 4. Does It Have A Tail? \n 5. Does It Have Wings?".colorize(:green)
     puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
-    puts "\n \n \n"
+    # puts "\n \n \n"
   end
 
   def select_a_search
@@ -183,9 +185,10 @@ class CLI
         if @myth
             puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
             puts @myth.name.capitalize
+            puts "-----------".colorize(:light_blue)
             puts @myth.location.capitalize
             puts @myth.origin_country.capitalize
-            puts @myth.facts.capitalize
+            puts @myth.facts.capitalize.wrap
             puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
         else
           puts "I'm sorry that's not a known creature. Did you discover something new? (y/n)".colorize(:green)
@@ -276,7 +279,6 @@ class CLI
 
   def save_to_book
     puts "Wow, that seems really neat. Would you like to add this creature to your book? (y/n)".colorize(:green)
-    puts "\n"
     answer = gets.chomp.downcase
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
       puts "\n \n"
@@ -296,7 +298,6 @@ class CLI
     else
       puts "\n \n \n"
       puts "Ok. Shall we look for something else? (y/n)".colorize(:green)
-      puts "\n \n \n"
       keep_searching
     end
   end
@@ -304,8 +305,8 @@ class CLI
   def view_book
     puts "\n \n"
     puts "Your book is looking amazing! Would you like to see it so far? (y/n)".colorize(:green)
-    puts "\n"
     answer = gets.chomp.downcase
+    puts "\n"
     if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
       if !@user.user_myths.empty?
           sorted =  @user.user_myths.sort do |a,b|
@@ -319,7 +320,7 @@ class CLI
            puts usermyth.myth.name.capitalize
            puts usermyth.myth.location.capitalize
            puts usermyth.myth.origin_country.capitalize
-           puts usermyth.myth.facts.capitalize
+           puts usermyth.myth.facts.capitalize.wrap
            puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
         end
         remove_entry
@@ -339,7 +340,7 @@ class CLI
 end
 
 def keep_searching
-  puts "\n \n"
+  # puts "\n \n"
   answer = gets.chomp.downcase
   puts "\n \n \n"
   if answer == "y" || answer == "yes" || answer == "ok" || answer == "sure" || answer == "yeah"
@@ -375,6 +376,13 @@ def remove_entry
     puts "Sounds good! Would you like to go back to exploring? (y/n)".colorize(:green)
   keep_searching
   end
+end
+
+def start_music(file)
+  @player = Audite.new
+  # binding.pry
+  @player.load(file)
+  @player.start_stream
 end
 
 end
