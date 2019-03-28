@@ -7,15 +7,15 @@ dan = User.find_or_create_by(name: "Dan")
 
 # MYTHS
 
-pegasus = Myth.find_or_create_by(name: "Pegasus", location: "Sky", origin_country: "Greece", facts: "born from the mixture of sea foam, pain and Medusa’s blood", has_tail: true, has_wings: true)
+pegasus = Myth.find_or_create_by(name: "Pegasus", location: "Sky", origin_country: "Greece", facts: "Born from the mixture of sea foam, pain and Medusa’s blood.", has_tail: true, has_wings: true)
 
-sirens = Myth.find_or_create_by(name: "Sirens", location: "Sea", origin_country: "Greece", facts: "legendary sea-nymphs who lured sailors passing nearby to death with their beautiful voices and enchanting songs.", has_tail: true, has_wings: false)
+sirens = Myth.find_or_create_by(name: "Sirens", location: "Sea", origin_country: "Greece", facts: "Legendary sea-nymphs who lured sailors passing nearby to death with their beautiful voices and enchanting songs.", has_tail: true, has_wings: false)
 
-sphinx_greece = Myth.find_or_create_by(name: "Sphinx", location: "Land", origin_country: "Greece", facts: "the Greek sphinx had a lion’s body, a woman’s head and an eagle’s chest and wings (and the tail of a serpent in some versions of the accounts), and was a merciless and treacherous creature.", has_tail: true, has_wings: true)
+sphinx_greece = Myth.find_or_create_by(name: "Sphinx", location: "Land", origin_country: "Greece", facts: "The Greek sphinx had a lion’s body, a woman’s head and an eagle’s chest and wings (and the tail of a serpent in some versions of the accounts), and was a merciless and treacherous creature.", has_tail: true, has_wings: true)
 
-sphinx_egyption = Myth.find_or_create_by(name: "Sphinx", location: "Land", origin_country: "Egypt", facts: "the Greek sphinx had a lion’s body, a man’s head and an eagle’s chest and wings (and the tail of a serpent in some versions of the accounts), and was a benevolent figure.", has_tail: true, has_wings: true)
+sphinx_egyption = Myth.find_or_create_by(name: "Sphinx", location: "Land", origin_country: "Egypt", facts: "The Egyption sphinx had a lion’s body, a man’s head and an eagle’s chest and wings (and the tail of a serpent in some versions of the accounts), and was a benevolent figure.", has_tail: true, has_wings: true)
 
-centaur = Myth.find_or_create_by(name: "Centaur", location: "Land", origin_country: "Greece", facts: " the torso and head of a human being and the body of a horse.", has_tail: true, has_wings: false)
+centaur = Myth.find_or_create_by(name: "Centaur", location: "Land", origin_country: "Greece", facts: "Has the torso and head of a human being and the body of a horse.", has_tail: true, has_wings: false)
 
 # USER-MYTHS
 

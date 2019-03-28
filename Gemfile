@@ -9,3 +9,4 @@ gem "faker"
 gem 'word_wrap'
 gem  'colorize'
 gem 'audite'
+gem 'emoji'
