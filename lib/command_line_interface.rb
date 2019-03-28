@@ -141,7 +141,7 @@ class CLI
       save_to_book
     elsif select == "5" || select == "wing" || select == "does it have wings?" || select == "does it have a wings" || select ==
     "wing?" || select == "wings" || select == "wings?" || select == "does it have wing" || select == "does it have wing?"
-      puts "You have chosen to seach by if the creature has wings. Which one would you like to learn more about?".colorize(:green).wrap
+      puts "You have chosen to search by if the creature has wings. Which one would you like to learn more about?".colorize(:green).wrap
       puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
       search_by_wings
       species_info
@@ -318,7 +318,7 @@ class CLI
       else
       puts "Awesome!".colorize(:green).wrap
       puts "\n"
-      puts "Let's find a place for it in your book. What page should it go on? (Page 1 <=> Page 10)".colorize(:light_cyan).wrap
+      puts "Let's find a place for it in your book. Beginning? Middle? End? (Beginning(1)<=>End (10)".colorize(:light_cyan).wrap
       puts "\n"
       input = gets.chomp
       page_input(input)
@@ -332,6 +332,7 @@ class CLI
 
   def page_input(input)
     # if input == [1...10]
+    # input = gets.chomp.to_f
     if input == "1" || input == "2" || input == "3" || input == "4" || input == "5" || input == "6" || input == "7" || input == "8" || input == "9" || input == "10"
       UserMyth.create(user_id: @user.id, myth_id: @myth.id, rating: input)
       refetch_user
@@ -340,7 +341,7 @@ class CLI
     else
       puts "\n"
       puts "I'm sorry that's not a valid page number. Lets try that again.".colorize(:green).wrap
-      input = gets.chomp.to_f
+      input = gets.chomp
       page_input(input)
     end
   end
@@ -372,7 +373,7 @@ class CLI
         case answer_prompt(prompt)
         when 'y'
           puts "\n \n \n"
-          puts "You book is looking great! Would you like to keep exploring? (y/n)".colorize(:green).wrap
+          puts "You book is looking great!".colorize(:green).wrap
           keep_searching
         when 'n'
           whats_wrong
@@ -407,13 +408,11 @@ def refetch_user
   @user = User.find(@user.id)
 end
 
+def refetch_myth
+  @myth = Myth.find(@myth.id)
+end
+
 def remove_entry
-  # puts "\n \n"
-  # puts "Wow look at all those entries!".colorize(:green).wrap
-  # prompt = "Are there any you want to remove? (y/n)".colorize(:green).wrap
-  # puts "\n \n \n"
-  # case answer_prompt(prompt)
-  # when 'y'
     puts "\n \n \n"
     puts "Which one?".colorize(:light_cyan).underline.wrap
     puts sort_user_myths
@@ -430,10 +429,6 @@ def remove_entry
       end
     refetch_user
     view_book
-   # when 'n'
-  #   puts "Sounds good!".colorize(:green).wrap
-  # keep_searching
-  # end
 end
 
 def start_music(file)
