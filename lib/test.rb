@@ -10,7 +10,8 @@
 # end
 
 def fixing
-  puts "Which one needs fixing?"
+  puts "Which one needs fixing?".colorize(:green).underline.wrap
+  puts sort_user_myths
   name = gets.chomp.capitalize
   creature = Myth.find_by(name: "#{name}")
   puts "What was wrong with it? \n 1. Name \n 2. Location \n 3. Origin Country \n 4. Facts"
@@ -18,22 +19,26 @@ def fixing
   if error == "name" || error == "1"
     puts "Ok, what do we want to rename it?"
     new_name = gets.chomp.capitalize
-    Myth.update(name: creature.name, name: "#{new_name}")
+    creature.update(name: creature.name, name: new_name)
+    creature.save
   view_book
   elsif error == "location" || error == "2"
     puts "Ok, where does it actually live?"
     new_location = gets.chomp.capitalize
-    Myth.update(location: creature.location, location: "#{new_location}")
+    creature.update(location: creature.location, location: new_location)
+    creature.save
   keep_searching
   elsif error == "country of origin" || error == "3" || error == "country" || error == "origin"
     puts "Ok, where was it actually originally from?"
     new_origin = gets.chomp.capitalize
-    Myth.update(origin_country: creature.origin_country, origin_country: "#{new_origin}")
+    creature.update(origin_country: creature.origin_country, origin_country: new_origin)
+    creature.save
   keep_searching
 elsif error == "facts" || error == "4" || error == "info" || error == "the facts"
     puts "Ok, what fact is correct about this creature?"
     new_fact= gets.chomp.capitalize
-    Myth.update(fact: creature.fact, fact: "#{new_fact}")
+    creature.update(facts: creature.facts, facts: new_fact)
+    creature.save
   keep_searching
   else
     puts "I'm sorry, we can't fix that. Do you want to try again?"

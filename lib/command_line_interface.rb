@@ -408,14 +408,15 @@ def refetch_user
 end
 
 def remove_entry
-  puts "\n \n"
-  puts "Wow look at all those entries!".colorize(:green).wrap
-  prompt = "Are there any you want to remove? (y/n)".colorize(:green).wrap
-  puts "\n \n \n"
-  case answer_prompt(prompt)
-  when 'y'
+  # puts "\n \n"
+  # puts "Wow look at all those entries!".colorize(:green).wrap
+  # prompt = "Are there any you want to remove? (y/n)".colorize(:green).wrap
+  # puts "\n \n \n"
+  # case answer_prompt(prompt)
+  # when 'y'
     puts "\n \n \n"
-    puts "Which one?".colorize(:light_cyan).wrap
+    puts "Which one?".colorize(:light_cyan).underline.wrap
+    puts sort_user_myths
       delete_myth_name = gets.chomp.capitalize
       name = Myth.pluck(:name)
       if name.include?(delete_myth_name)
@@ -429,10 +430,10 @@ def remove_entry
       end
     refetch_user
     view_book
-   when 'n'
-    puts "Sounds good!".colorize(:green).wrap
-  keep_searching
-  end
+   # when 'n'
+  #   puts "Sounds good!".colorize(:green).wrap
+  # keep_searching
+  # end
 end
 
 def start_music(file)
