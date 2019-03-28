@@ -308,13 +308,11 @@ class CLI
     case answer_prompt(prompt)
     when 'y'
       puts "\n \n"
-      myths = sort_user_myths.each do |myth_names|
+      myths = sort_user_myths.map do |myth_names|
         myth_names == @myth.name
         # binding.pry
       end
-        # binding.pry
-        # binding.pry
-      if myths
+      if myths == nil
         puts "I'm sorry it seems like you already have that creature in your book...but ".colorize(:green).wrap
         view_book
       else
@@ -334,7 +332,7 @@ class CLI
 
   def page_input(input)
     # if input == [1...10]
-    if input == 1 || input == 2 || input == 3 || input == 4 || input == 5 || input == 6 || input == 7 || input == 8 || input == 9 || input == 10
+    if input == "1" || input == "2" || input == "3" || input == "4" || input == "5" || input == "6" || input == "7" || input == "8" || input == "9" || input == "10"
       UserMyth.create(user_id: @user.id, myth_id: @myth.id, rating: input)
       refetch_user
       view_book
@@ -363,16 +361,22 @@ class CLI
            puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
            puts "Page #{index + 1}"
            puts "-------".colorize(:light_red)
-           puts usermyth.myth.name.capitalize
+           puts usermyth.myth.name.capitalize.underline
            puts usermyth.myth.location.capitalize
            puts usermyth.myth.origin_country.capitalize
            puts usermyth.myth.facts.capitalize.wrap
            puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
         end
-        remove_entry
         puts "\n \n \n"
-        puts "You book is looking great! Would you like to keep exploring? (y/n)".colorize(:green).wrap
-        keep_searching
+        prompt = "Does this information look right to you? (y/n)".colorize(:green).wrap
+        case answer_prompt(prompt)
+        when 'y'
+          puts "\n \n \n"
+          puts "You book is looking great! Would you like to keep exploring? (y/n)".colorize(:green).wrap
+          keep_searching
+        when 'n'
+          whats_wrong
+        end
       else
         puts "\n \n \n"
         puts "I'm sorry, it looks like you haven't entered any creatures into your book yet.".colorize(:green).wrap
@@ -439,14 +443,8 @@ def start_music(file)
 end
 
 def sort_user_myths
- #  sorted =  @user.user_myths.sort do |a,b|
- #    a.rating <=> b.rating
- #  end
- # sorted.each_with_index do |usermyth, index|
- #  puts usermyth.myth.name
   @user.user_myths.map do |myth_id|
     myth_id.myth.name
-    # binding.pry
  end
 end
 
