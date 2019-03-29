@@ -15,34 +15,25 @@ def update_myths
       puts "\n \n"
       puts "Ok, what do we want to rename it?".colorize(:light_cyan).wrap
       new_name = gets.chomp.capitalize
-      # binding.pry
       @myth.update(name: @myth.name, name: new_name)
-      @myth.save
-      # @myth = Myth.find(@myth.id)
-    # view_book
+    view_book
     elsif error == "location" || error == "2"
       puts "\n \n"
       puts "Ok, where does it actually live?".colorize(:light_cyan).wrap
       new_location = gets.chomp.capitalize
-      creature.update(location: creature.location, location: new_location)
-      creature.save
-      refetch_myth
+      @myth.update(location: @myth.location, location: new_location)
     view_book
     elsif error == "country of origin" || error == "3" || error == "country" || error == "origin"
       puts "\n \n"
       puts "Ok, where was it actually originally from?".colorize(:light_cyan).wrap
       new_origin = gets.chomp.capitalize
-      creature.update(origin_country: creature.origin_country, origin_country: new_origin)
-      creature.save
-      refetch_myth
+      @myth.update(origin_country: @myth.origin_country, origin_country: new_origin)
     view_book
     elsif error == "facts" || error == "4" || error == "info" || error == "the facts"
       puts "\n \n"
       puts "Ok, what fact is correct about this creature?".colorize(:light_cyan).wrap
       new_fact= gets.chomp.capitalize
-      creature.update(facts: creature.facts, facts: new_fact)
-      creature.save
-      refetch_myth
+      @myth.update(facts: @myth.facts, facts: new_fact)
     view_book
     else
       puts "\n \n"

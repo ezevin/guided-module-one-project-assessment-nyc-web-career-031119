@@ -308,11 +308,7 @@ class CLI
     case answer_prompt(prompt)
     when 'y'
       puts "\n \n"
-      myths = sort_user_myths.map do |myth_names|
-        myth_names == @myth.name
-        # binding.pry
-      end
-      if myths == nil
+      if sort_user_myths.include?(@myth.name)
         puts "I'm sorry it seems like you already have that creature in your book...but ".colorize(:green).wrap
         view_book
       else
@@ -347,6 +343,7 @@ class CLI
   end
 
   def view_book
+    refetch_user
     puts "\n \n"
     puts "Your book is looking amazing!".colorize(:green).wrap
     prompt = "Would you like to see it so far? (y/n)".colorize(:green).wrap
@@ -358,6 +355,7 @@ class CLI
             a.rating <=> b.rating
           end
          sorted.each_with_index do |usermyth, index|
+           # binding.pry
            puts "\n \n \n"
            puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
            puts "Page #{index + 1}"
@@ -410,6 +408,7 @@ end
 
 def refetch_myth
   @myth = Myth.find(@myth.id)
+
 end
 
 def remove_entry
