@@ -51,7 +51,8 @@ class CLI
   end
 
   def who_are_you
-    puts "Wait you're not Newt Scamander. Who are you?".colorize(:red).bold.wrap
+    puts "\n \n \n"
+    puts "WAIT YOU'RE NOT NEWT SCAMANDER. WHO ARE YOU?".colorize(:red).bold.wrap
     name = gets.chomp.capitalize
     @user = User.find_by(name: "#{name}")
     if @user != nil
