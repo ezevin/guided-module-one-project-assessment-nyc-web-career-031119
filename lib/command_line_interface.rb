@@ -98,6 +98,7 @@ class CLI
   end
 
   def find_a_myth
+    puts "\n \n \n"
     puts "Where would you like to begin your search? You can search by:".colorize(:green).wrap
     puts "~*~*~*~*~*~*~*~*~*~*~*~*".colorize(:magenta)
     puts "\s1. Species \n 2. Location \n 3. Country of Origin \n 4. Does It Have A Tail? \n 5. Does It Have Wings?".wrap
@@ -396,6 +397,7 @@ def keep_searching
     find_a_myth
     select_a_search
   when 'n'
+    puts "\n \n"
     puts "Alright until next time!".colorize(:green).wrap
     puts "\n \n"
     exit
