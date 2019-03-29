@@ -2,7 +2,7 @@ require_relative '../config/environment'
 
 cli = CLI.new
 #
-# cli.start_music("./music/hptheme.mp3")
+cli.start_music("./music/hptheme.mp3")
 cli.greet
 cli.hit_space
 cli.hello
